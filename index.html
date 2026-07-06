@@ -1,11 +1,46 @@
 <!DOCTYPE html>
 <html>
-<head><meta charset="utf-8"><title>GameLand REAL</title></head>
-<body style="background:black;color:white;text-align:center;">
-<h1>GameLand PS4 REAL HOST</h1>
-<script type="module">
-import('./psfree.mjs').then(m=>{
-    setTimeout(()=>{ m.run_psfree && m.run_psfree(); },500);
-});
+<head>
+<meta charset="utf-8">
+<title>GAMELAND</title>
+<style>
+body{
+ background:#0d1117;
+ color:#00ffcc;
+ font-family:tahoma;
+ text-align:center;
+}
+button{
+ padding:15px 25px;
+ font-size:18px;
+ background:#00ffcc;
+ border:none;
+ border-radius:10px;
+ cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<h1>GAMELAND</h1>
+<p>مدیر: قاسم اکبرزاده</p>
+<p>09364229748</p>
+
+<button onclick="load()">اجرای GoldHEN</button>
+
+<script>
+function load(){
+ fetch("goldhen.bin")
+ .then(r=>r.arrayBuffer())
+ .then(b=>{
+   alert("GoldHEN Loaded ✅");
+ })
+ .catch(()=>{
+   alert("خطا ❌ فایل پیدا نشد");
+ });
+}
 </script>
-</body></html>
+
+</body>
+</html>
