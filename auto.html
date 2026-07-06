@@ -2,24 +2,26 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>GAMELAND AUTO</title>
+<title>AUTO HOST</title>
 </head>
 
 <body style="background:black;color:#00ffcc;text-align:center;">
 
-<h2>Loading GAMELAND...</h2>
+<h2 id="status">Loading...</h2>
+
+<script src="webkit.js"></script>
+<script src="exploit.js"></script>
+<script src="kernel.js"></script>
+<script src="kexploit.js"></script>
+<script src="loader.js"></script>
 
 <script>
-setTimeout(()=>{
- fetch("goldhen.bin")
- .then(r=>r.arrayBuffer())
- .then(()=>{
-   document.body.innerHTML="<h2>GoldHEN Loaded ✅</h2>";
- })
- .catch(()=>{
-   document.body.innerHTML="<h2>Error ❌</h2>";
- });
-},2000);
+window.onload = function(){
+ document.getElementById("status").innerHTML="Running Auto Exploit...";
+ setTimeout(()=>{
+   load_goldhen();
+ },3000);
+}
 </script>
 
 </body>
