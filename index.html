@@ -1,25 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<title>Gameland Host</title>
-<style>
-body{
-background:#0f172a;
-color:white;
-text-align:center;
-font-family:tahoma;
-margin-top:100px;
-}
-h1{color:#38bdf8;}
-</style>
+<meta charset="UTF-8">
+<title>GAMELAND AUTO</title>
 </head>
-<body>
 
-<h1>Gameland</h1>
-<p>در حال اجرای GoldHEN...</p>
+<body style="background:black;color:white;text-align:center">
 
-<script src="exploit.js"></script>
+<h1>GAMELAND AUTO HEN</h1>
+<p id="status">Loading Exploit...</p>
+
+<script src="psfree.js"></script>
+
+<script>
+setTimeout(() => {
+    document.getElementById("status").innerHTML = "Running Exploit...";
+    runExploit();
+}, 2000);
+</script>
 
 </body>
 </html>
