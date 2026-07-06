@@ -2,43 +2,28 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>GAMELAND</title>
-<style>
-body{
- background:#0d1117;
- color:#00ffcc;
- font-family:tahoma;
- text-align:center;
-}
-button{
- padding:15px 25px;
- font-size:18px;
- background:#00ffcc;
- border:none;
- border-radius:10px;
- cursor:pointer;
-}
-</style>
+<title>GAMELAND HOST</title>
 </head>
 
-<body>
+<body style="background:#0d1117;color:#00ffcc;text-align:center;">
 
-<h1>GAMELAND</h1>
-<p>مدیر: قاسم اکبرزاده</p>
-<p>09364229748</p>
+<h1>GAMELAND HOST</h1>
+<h3 id="status">Ready...</h3>
 
-<button onclick="load()">اجرای GoldHEN</button>
+<button onclick="run()">Run Exploit</button>
+
+<script src="webkit.js"></script>
+<script src="exploit.js"></script>
+<script src="kernel.js"></script>
+<script src="kexploit.js"></script>
+<script src="loader.js"></script>
 
 <script>
-function load(){
- fetch("goldhen.bin")
- .then(r=>r.arrayBuffer())
- .then(b=>{
-   alert("GoldHEN Loaded ✅");
- })
- .catch(()=>{
-   alert("خطا ❌ فایل پیدا نشد");
- });
+function run(){
+ document.getElementById("status").innerHTML="Running Exploit...";
+ setTimeout(()=>{
+   load_goldhen();
+ },3000);
 }
 </script>
 
