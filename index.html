@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>PS4 Host</title>
-<meta charset="UTF-8">
+<meta charset="utf-8">
+<title>PS4 Auto Host</title>
 </head>
+<body>
 
-<body style="background:#0b0f1a;color:white;text-align:center;font-family:sans-serif">
+<h2>PS4 GoldHEN Host</h2>
 
-<h1>PS4 Auto GoldHEN</h1>
-
-<button onclick="location.href='auto.html'">Run GoldHEN</button>
+<button onclick="run()">Run GoldHEN</button>
 
 <script>
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js');
+function run(){
+    window.location.href = "auto.html";
 }
 </script>
 
