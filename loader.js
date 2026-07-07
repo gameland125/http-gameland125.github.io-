@@ -1,7 +1,9 @@
-function loadGoldHen(){
-    fetch("goldhen.bin")
-    .then(r => r.arrayBuffer())
+function loadPayload(path){
+    fetch(path)
+    .then(res => res.arrayBuffer())
     .then(buf => {
-        // inject payload
-    });
+        console.log("Payload Loaded");
+        // اینجا inject واقعی انجام میشه
+    })
+    .catch(() => alert("Payload load error"));
 }
