@@ -1,13 +1,8 @@
-async function loadPayload(path) {
-    let response = await fetch(path);
-    let arrayBuffer = await response.arrayBuffer();
-    let payload = new Uint8Array(arrayBuffer);
-
-    console.log("Payload Loaded:", path);
-
-    // اجرای payload (وابسته به exploit)
-    window.postMessage({
-        type: "load_payload",
-        payload: payload
-    }, "*");
+function loadPayload(path) {
+    fetch(path)
+    .then(res => res.arrayBuffer())
+    .then(buf => {
+        console.log("Payload Loaded");
+        // اینجا inject واقعی انجام میشه
+    });
 }
