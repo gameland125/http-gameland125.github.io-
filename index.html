@@ -6,13 +6,13 @@
 </head>
 <body>
 
-<h2>PS4 GoldHEN Host</h2>
+<h2>PS4 Host Ready</h2>
 
-<button onclick="run()">Run GoldHEN</button>
+<a href="auto.html">AUTO HEN</a>
 
 <script>
-function run(){
-    window.location.href = "auto.html";
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js');
 }
 </script>
 
