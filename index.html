@@ -1,29 +1,54 @@
-tSV0d6kEX6y1W8o294DY9fmkGhB5Fy+cmXYAcPAf3apE8bgUKNWRAJ0FH8sC01qaFXN4RutkurBK2v6eEtOYBa++ih0GJWy2y1R5f2zOP7l6DFCJEnOJ+0wwEzf6tasqJJ+ox2MZYm5GlFWDt4fgxpxb0rPSA2Elhz/yELl/2gw+2iRnuQb2oOX5f+CsAX+e2E0EQAlHw/79ZTMwsnCqYfTaOq043UNTlB+UZVQ1O/GplZbN6/Kdn7Yan7J5/JbTK9ru9fsxDdz0zNtbEhpivrCymYDZeU8uEmfp5RbCGWPpkXyk/W5G2XYOi8nPBpWXx5GYv3ByWBRVBR/BmtPxmWd2ShM12vjiBtZEpi+5KaeuLl85BzL6A7XbtKmMhUieln4TeTzxLdUfNG+Nx+I3KCfaHh5L0yr5djj0TBhM0JTKGbBVf7eUs/tM6pO35BH8TkMBChn2MlJWLYioWL+6CWCJbKHCw22y4ygYS/Aat4K3emdvKskAH5SK9TDoVCt2HKd8WxzL8gspNmZ7z/8VWXxgWDVvoPq12qHdqnKS52NgI2QZqxtQRk9mS0Eum5xhd1as4oitGg83/NEZQo//IQ0J8mhhyZTdGecSzhxZN8ITmxFTxyh0O0SmymDz7Jb/YG3UfATPy2EkhJepT/Eb0v4K0zGJUgE6t01vG2Hb7IjSDwIRg6wGc5SyO1MismPM9Y55ybDPfb+BC10O9h7QYI86faz3RUgNMpLFZGTZ8eQ1+2T/M4JfCDCrh83YF2QSD/6/+Fr2Fyxl8leJ3FmqwPuexzx2OA4wlYC/UB9VRHfY0dRjYgtx+9GtMBlPXpC0VvwoX09UR9APFfVECaaypN4DSbssTx2J9wKgzpYFoNRmOuwqWLZ5hfrkxNGceZpCgusnPbTC0jHlaY1UdzGyuw/kw/tL2LEHDcB8eBkQoYSvL2B8i1GqI5xyQPfbudJqTLpQ/qKVkVSejpr3ZQwWoKcnxTqCQ3ZP0TLJf3Zq6Gl7hqylnXTdthF8X3FWncrqndUzT9yXtLXJgF06J2DWSDl9rQkfbtqSmdxxzhKawK8loG5RoolfGAhOPVlwBVqEkv606FbctJKYIx2+ARQYSARf+GK4Xougf2J3+X8v5w3TjthvTMA4hFzNzUFNM5b40FQZw5SyN6Uwun0rWGjV+rNomjilUHEK/7WhghpI7bbp9tdrwPJTFZGnXa//UbPdD+8Z1HcZqtIs5MTuPlO+oPoNDkeXhYT+lXsB+otErclRM8oz1A6+Wvizx/YhtDtoHzxj+9IS6himBvUZFPrvePhxCeZS3V3Go5eB+8ZWAHTt7LRTbkhr8ppdj9fkTYAASUMl5zzk3CQAAAABJRU5ErkJggg==");
-color:white;font-size:20px;text-align:center;margin:0;overflow:hidden;}
-.info{overflow: hidden;position: fixed;position: absolute;top: 45%;left: 50%;font-size: 25px;font-family: sans-serif;color: #b8b8b8;transform: translate(-50%, -50%);}
+<html>
+<head>
+<title>GoldHEN Multi FW TEST - Leeful</title>
+<style>button{margin:0 0 7px 5px;padding:0 10px 0 10px;height:26px;}select{margin:0;border:0;height:24px;}
 </style>
 <script>
-if (window.applicationCache.status=='0'){window.location.replace("cache.html");}
-
-function awaitpl() {
-document.getElementById("loader").style.display = "none";
-document.getElementById("awaiting").style.display = "block";
-}
-function ghdone() {
-document.getElementById("loader").style.display = "none";
-document.getElementById("done").style.display = "block";
-}
 </script>
-<script src="int64.js"></script>
-<script src="rop.js"></script>
-<script src="kexploit.js"></script>
-<script src="webkit.js"></script>
 </head>
-<body onload="setTimeout(poc, 1500);">
-<div id="loader" class="info">Loading Exploit, Please Wait 20-30 Seconds ...</div>
-<div id="awaiting" class="info" style="display:none;">Send Payload To Port 9020</div>
-<div id="done" class="info" style="display:none;">All Done. Now Remove The USB Drive!</div>
-</body>
+<body style="background-color:#3462a8;color:white;font-size:20px;text-align:center;">
+<h1 id=msgs style='font-size:26px;margin:0;'>GoldHEN</h1>
+<hr>
+<div id="ExAndHen" style="display:none">
+<button onclick=load_Exp()> Run The Exploit </button> &nbsp;> 
+<button onclick=load_HEN()> Load GoldHEN </button>
+</div>
+<div id="GHen" style="display:none">
+<button onclick=load_HEN()> Load GoldHEN </button>
+</div>
+<iframe id=ifrm1 name=ifrm style="position:fixed;bottom:0px;opacity:0"></iframe>
+<div style="position:fixed;left:0;bottom:-8px;width:100%;font-size:16px;">
+<hr>GoldHEN Loader For Firmware 5.05,5.07,6.72 (7.xx to follow) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PS4 Firmware <span id="PS4fw"></span><hr>
+</div>
 <script>
+UA = navigator.userAgent.substring(navigator.userAgent.indexOf("0.00 (") + 28, navigator.userAgent.indexOf(") Apple")); PS4fw.innerHTML="v"+UA+" Detected";
+if (UA == "6.72"){ifrm1.src = "672cache.html";}
+if (UA == "5.05"||UA == "5.07"){ifrm1.src = "505cache.html";}
+if (window.applicationCache.status=='0')StopTheBloodyThing();
+
+if (UA == "5.05"||UA == "5.07"){
+GHen.style.display="block";
+msgs.innerHTML="5.05/5.07 GoldHEN";
+};
+
+if (UA == "6.72"){
+GHen.style.display="block";
+msgs.innerHTML="6.72 GoldHEN";
+var script=document.createElement('script');script.src="672exploit.js";document.body.appendChild(script);
+var script=document.createElement('script');script.src="672GoldHEN.js";document.body.appendChild(script);
+};
+
+function load_Exp(){
+msgs.innerHTML="Running The Exploit, Please Wait ...";
+if (UA == "6.72"){setTimeout(jailbreak,500);}
+}
+
+function load_HEN(){
+msgs.innerHTML="Loading GoldHEN v1.00 ...";
+LoadedMSG="GoldHEN v1.00 Loaded - Press Circle To Exit";
+if (UA == "5.05"||UA == "5.07"){function getScript(source,callback){var gs=document.createElement('script');gs.src=source;gs.onload=callback;gs.async=false;document.body.appendChild(gs);}function loadScript(){getScript("505exploit.js",function(){setTimeout(exploit,500);});}loadScript();}
+if (UA == "6.72"){setTimeout(jailbreak,500);}
+}
 </script>
+</body>
 </html>
