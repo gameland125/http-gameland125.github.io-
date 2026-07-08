@@ -1,1 +1,21 @@
-<h3>Offline Installed ✔</h3>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Offline Cache</title>
+</head>
+
+<body>
+
+<h2>Installing Cache...</h2>
+
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js').then(() => {
+        alert("Cache Installed");
+    });
+}
+</script>
+
+</body>
+</html>
