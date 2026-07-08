@@ -1,5 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Auto GoldHen</title>
+</head>
+
+<body>
+<h1>Loading GoldHen...</h1>
+
+<script src="exploit/webkit.js"></script>
+<script src="exploit/rop.js"></script>
+<script src="exploit/syscalls.js"></script>
+<script src="exploit/exploit.js"></script>
+
 <script>
+function loadPayload(url){
+    let xhr = new XMLHttpRequest();
+    xhr.open("GET", url, true);
+    xhr.responseType = "arraybuffer";
+    xhr.onload = function(){
+        let payload = new Uint8Array(xhr.response);
+        console.log("Payload Loaded");
+        // inject here (depends exploit)
+    };
+    xhr.send();
+}
+
 window.onload = function(){
-    loadPayload();
+    setTimeout(function(){
+        loadPayload("/payloads/goldhen.bin");
+    }, 3000);
 }
 </script>
+
+</body>
+</html>
