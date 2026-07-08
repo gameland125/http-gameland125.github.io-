@@ -2,18 +2,16 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Offline Cache</title>
+<title>Offline Ready</title>
 </head>
-
 <body>
 
-<h2>Installing Cache...</h2>
+<h2>Offline Cache Installed ✔</h2>
+<p>Disconnect internet and run auto.html</p>
 
 <script>
 if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js').then(() => {
-        alert("Cache Installed");
-    });
+  navigator.serviceWorker.register('sw.js');
 }
 </script>
 
