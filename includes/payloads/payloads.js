@@ -244,3 +244,6 @@ function custom(payloadFile) {
 function load_GoldHEN(name) {
     Loadpayloadlocal("./includes/payloads/Bins/goldhen_2.4b14.bin", name);
 }
+function load_GoldHEN(name) {
+    Loadpayloadlocal("./includes/payloads/Bins/GoldHEN.bin", name);
+}
