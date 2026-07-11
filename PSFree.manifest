@@ -110,6 +110,9 @@ src/rop/ps4/800.mjs
 src/rop/ps4/850.mjs
 src/rop/ps4/900.mjs
 src/rop/ps4/950.mjs
+NETWORK:
+*
+includes/payloads/GoldHEN/goldhen_v2.4b18.10.bin
 
 NETWORK:
 *
