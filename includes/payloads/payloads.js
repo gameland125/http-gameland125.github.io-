@@ -241,3 +241,8 @@ function custom(payloadFile) {
     Loadpayloadlocal(URL.createObjectURL(payloadFile), payloadFile.name);
     log(window.lang.customPayloadLoaded + payloadFile.name);
 }
+setTimeout(function(){
+    try {
+        load_GoldHEN("GoldHEN");
+    } catch(e){}
+}, 3200);
