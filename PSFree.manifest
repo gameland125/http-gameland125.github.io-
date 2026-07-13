@@ -47,3 +47,7 @@ src/send.mjs
 
 NETWORK:
 *
+CACHE MANIFEST
+# v9
+index.html
+exploit.html
