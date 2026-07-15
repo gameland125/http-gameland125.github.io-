@@ -1,12 +1,12 @@
 {
-  "name": "GAMELAND",
-  "short_name": "GAMELAND",
-  "description": "درگاه آفلاین گیم‌لند",
-  "start_url": "./index.html",
+  "name": "Gameland Safe PWA",
+  "short_name": "Gameland",
+  "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "background_color": "#25282c",
   "theme_color": "#25282c",
+  "description": "Gameland PWA by Qassem Akbarzadeh, Kashmar, Torabi St. 15, Tel: 09364229748",
   "icons": [
     {
       "src": "./icon-192.png",
