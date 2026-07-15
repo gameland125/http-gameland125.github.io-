@@ -1,36 +1,166 @@
-const CACHE_NAME = 'gameland-cache-v1';
-const ASSETS = [
+'use strict';
+
+const CACHE_NAME = 'gameland-shell-v2';
+
+const APP_SHELL = [
   './',
   './index.html',
-  './main.js',
   './style.css',
+  './main.js',
   './manifest.webmanifest',
   './icon-192.png',
-  './icon-512.png'
+  './icon-512.png',
+  './exploit.html',
+  './includes/js/index-legacy.js',
+  './includes/js/index.js',
+  './includes/js/payloadsList.js',
+  './includes/js/language.js',
+  './includes/js/events.js',
+  './includes/js/checkFw.js',
+  './includes/js/HENs.js',
+  './includes/js/design.js',
+  './includes/js/autoJbRetry.js',
+  './includes/js/languages/ar.js',
+  './includes/js/languages/en.js',
+  './includes/js/languages/tr.js',
+  './includes/js/languages/zh-cn.js',
+  './includes/js/languages/fa.js',
+  './includes/js/languages/ru.js',
+  './includes/js/languages/es.js',
+  './includes/js/exploits/672entrypoint.js',
+  './includes/js/exploits/672kexploit.js',
+  './includes/js/exploits/bundle.js',
+  './includes/payloads/payloads.js',
+  './includes/payloads/Bins/Orbis-Toolbox-900.bin',
+  './includes/payloads/Bins/WebRTE.bin',
+  './includes/payloads/Bins/appcache-install.bin',
+  './includes/payloads/Bins/np-fake-signin-ps4.elf',
+  './includes/payloads/Bins/ps4-app-dumper.bin',
+  './includes/payloads/Bins/ps4-app2usb.bin',
+  './includes/payloads/Bins/ps4-backup.bin',
+  './includes/payloads/Bins/ps4-disable-aslr.bin',
+  './includes/payloads/Bins/ps4-disable-updates.bin',
+  './includes/payloads/Bins/ps4-enable-updates.bin',
+  './includes/payloads/Bins/ps4-exit-idu.bin',
+  './includes/payloads/Bins/ps4-ftp.bin',
+  './includes/payloads/Bins/ps4-history-blocker.bin',
+  './includes/payloads/Bins/ps4-kernel-dumper.bin',
+  './includes/payloads/Bins/ps4-module-dumper.bin',
+  './includes/payloads/Bins/ps4-permanent-uart.bin',
+  './includes/payloads/Bins/ps4-pup-decrypt.bin',
+  './includes/payloads/Bins/ps4-restore.bin',
+  './includes/payloads/Bins/ps4-rif-renamer.bin',
+  './includes/payloads/Bins/ps4-websrv.bin',
+  './includes/payloads/Bins/ps4debug.bin',
+  './includes/payloads/Bins/elfldr.bin',
+  './includes/payloads/Bins/elfldr.elf',
+  './includes/payloads/Bins/fan-thresholds/ps4-fan-threshold60.bin',
+  './includes/payloads/Bins/fan-thresholds/ps4-fan-threshold70.bin',
+  './includes/payloads/Bins/fan-thresholds/ps4-fan-threshold80.bin',
+  './includes/payloads/Bins/fan-thresholds/ps4-fan-threshold85.bin',
+  './includes/payloads/GoldHEN/goldhen_v2.4b18.5.bin',
+  './includes/payloads/GoldHEN/goldhen_v2.4b18.6.bin',
+  './includes/payloads/GoldHEN/goldhen_v2.4b18.7.bin',
+  './includes/payloads/GoldHEN/goldhen_v2.4b18.8.bin',
+  './includes/payloads/GoldHEN/goldhen_v2.4b18.9.bin',
+  './includes/payloads/GoldHEN/goldhen_v2.4b18.10.bin',
+  './includes/payloads/HEN/HEN.bin',
+  './includes/payloads/Linux/linux-1024mb.elf',
+  './includes/payloads/Linux/linux-128mb.elf',
+  './includes/payloads/Linux/linux-2048mb.elf',
+  './includes/payloads/Linux/linux-256mb.elf',
+  './includes/payloads/Linux/linux-3072mb.elf',
+  './includes/payloads/Linux/linux-32mb.elf',
+  './includes/payloads/Linux/linux-4096mb.elf',
+  './includes/payloads/Linux/linux-512mb.elf',
+  './includes/payloads/Linux/linux-64mb.elf',
+  './includes/css/layouts/compact.css',
+  './includes/css/layouts/index.css',
+  './includes/css/colors/default.css',
+  './includes/css/colors/vibrant.css',
+  './src/alert.mjs',
+  './src/config.mjs',
+  './src/lapse.mjs',
+  './src/psfree.mjs',
+  './src/send.mjs',
+  './src/fonts/FONTS.LICENSE',
+  './src/fonts/LiberationMono-Regular.ttf',
+  './src/kpatch/700.bin',
+  './src/kpatch/750.bin',
+  './src/kpatch/800.bin',
+  './src/kpatch/850.bin',
+  './src/kpatch/900.bin',
+  './src/kpatch/903.bin',
+  './src/kpatch/950.bin',
+  './src/kpatch/Makefile',
+  './src/lapse/ps4/700.mjs',
+  './src/lapse/ps4/750.mjs',
+  './src/lapse/ps4/751.mjs',
+  './src/lapse/ps4/800.mjs',
+  './src/lapse/ps4/850.mjs',
+  './src/lapse/ps4/852.mjs',
+  './src/lapse/ps4/900.mjs',
+  './src/lapse/ps4/903.mjs',
+  './src/lapse/ps4/950.mjs',
+  './src/module/chain.mjs',
+  './src/module/int64.mjs',
+  './src/module/mem.mjs',
+  './src/module/memtools.mjs',
+  './src/module/offset.mjs',
+  './src/module/rw.mjs',
+  './src/module/utils.mjs',
+  './src/module/view.mjs',
+  './src/rop/ps4/700.mjs',
+  './src/rop/ps4/750.mjs',
+  './src/rop/ps4/800.mjs',
+  './src/rop/ps4/850.mjs',
+  './src/rop/ps4/900.mjs',
+  './src/rop/ps4/950.mjs'
 ];
 
-self.addEventListener('install', event => {
+self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS))
+    caches.open(CACHE_NAME)
+      .then((cache) => cache.addAll(APP_SHELL))
+      .then(() => self.skipWaiting())
   );
-  self.skipWaiting();
 });
 
-self.addEventListener('activate', event => {
+self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then(keys =>
+    caches.keys().then((keys) =>
       Promise.all(
-        keys.map(key => key !== CACHE_NAME ? caches.delete(key) : null)
+        keys.map((key) => {
+          if (key !== CACHE_NAME) return caches.delete(key);
+        })
       )
-    )
+    ).then(() => self.clients.claim())
   );
-  self.clients.claim();
 });
 
-self.addEventListener('fetch', event => {
+self.addEventListener('fetch', (event) => {
+  if (event.request.method !== 'GET') return;
+
   event.respondWith(
-    caches.match(event.request).then(response => {
-      return response || fetch(event.request);
+    caches.match(event.request).then((cached) => {
+      if (cached) return cached;
+
+      return fetch(event.request)
+        .then((response) => {
+          if (!response || response.status !== 200 || response.type === 'opaque') {
+            return response;
+          }
+
+          const copy = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
+          return response;
+        })
+        .catch(() => {
+          if (event.request.mode === 'navigate') {
+            return caches.match('./index.html');
+          }
+          return new Response('', { status: 503, statusText: 'Offline' });
+        });
     })
   );
 });
