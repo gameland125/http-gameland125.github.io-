@@ -1,49 +1,102 @@
-// main.js - Gameland PWA
+const ui = {
+  jbStatus: document.getElementById('jbStatus'),
+  modeSelect: document.getElementById('modeSelect'),
+  langSelect: document.getElementById('langSelect'),
+  startBtn: document.getElementById('startBtn'),
+  retryBtn: document.getElementById('retryBtn'),
+  loaderBox: document.getElementById('loaderBox'),
+  loaderMsg: document.getElementById('loader-msg'),
+  body: document.body
+};
 
-(() => {
-  'use strict';
+const state = {
+  mode: localStorage.getItem('gamelandMode') || 'classic',
+  lang: localStorage.getItem('gamelandLang') || 'fa'
+};
 
-  const SW_URL = './service-worker.js';
-
-  function log(...args) {
-    console.log('[Gameland]', ...args);
+const texts = {
+  fa: {
+    ready: 'آماده',
+    loading: 'در حال بارگذاری...',
+    success: 'بارگذاری با موفقیت انجام شد',
+    failure: 'خطا در بارگذاری',
+    retry: 'بازآغاز'
+  },
+  en: {
+    ready: 'Ready',
+    loading: 'Loading...',
+    success: 'Loaded successfully',
+    failure: 'Load failed',
+    retry: 'Restart'
   }
+};
 
-  function registerServiceWorker() {
-    if (!('serviceWorker' in navigator)) {
-      log('Service Worker not supported');
-      return;
-    }
+function applyMode(mode) {
+  state.mode = mode;
+  localStorage.setItem('gamelandMode', mode);
+  ui.body.dataset.mode = mode;
+}
 
-    window.addEventListener('load', async () => {
-      try {
-        const reg = await navigator.serviceWorker.register(SW_URL, {
-          scope: './',
-        });
-        log('Service Worker registered:', reg.scope);
-      } catch (err) {
-        console.error('[Gameland] Service Worker registration failed:', err);
-      }
-    });
-  }
+function applyLanguage(lang) {
+  state.lang = lang;
+  localStorage.setItem('gamelandLang', lang);
+  ui.body.lang = lang;
+  ui.jbStatus.textContent = texts[lang].ready;
+  ui.loaderMsg.textContent = texts[lang].loading;
+  ui.retryBtn.textContent = texts[lang].retry;
+}
 
-  function setAppMeta() {
-    document.documentElement.lang = document.documentElement.lang || 'fa';
-    document.title = document.title || 'GAMELAND';
+function showLoader() {
+  ui.loaderBox.hidden = false;
+}
 
-    const metaTheme = document.querySelector('meta[name="theme-color"]');
-    if (metaTheme) metaTheme.setAttribute('content', '#777777');
-  }
+function hideLoader() {
+  ui.loaderBox.hidden = true;
+}
 
-  function init() {
-    setAppMeta();
-    registerServiceWorker();
-    log('PWA loaded');
-  }
+function simulateStart() {
+  ui.jbStatus.textContent = texts[state.lang].loading;
+  showLoader();
+  ui.loaderMsg.textContent = texts[state.lang].loading;
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init, { once: true });
-  } else {
-    init();
-  }
-})();
+  window.setTimeout(() => {
+    ui.loaderMsg.textContent = texts[state.lang].success;
+    ui.jbStatus.textContent = texts[state.lang].success;
+
+    window.setTimeout(() => {
+      hideLoader();
+      ui.jbStatus.textContent = texts[state.lang].ready;
+    }, 1200);
+  }, 1800);
+}
+
+function restartApp() {
+  localStorage.removeItem('gamelandMode');
+  localStorage.removeItem('gamelandLang');
+  window.location.reload();
+}
+
+ui.modeSelect.value = state.mode;
+ui.langSelect.value = state.lang;
+
+applyMode(state.mode);
+applyLanguage(state.lang);
+
+ui.modeSelect.addEventListener('change', (e) => {
+  applyMode(e.target.value);
+});
+
+ui.langSelect.addEventListener('change', (e) => {
+  applyLanguage(e.target.value);
+});
+
+ui.startBtn.addEventListener('click', simulateStart);
+ui.retryBtn.addEventListener('click', restartApp);
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./service-worker.js').catch(() => {
+    ui.jbStatus.textContent = state.lang === 'fa'
+      ? 'ثبت Service Worker ناموفق بود'
+      : 'Service Worker registration failed';
+  });
+}
