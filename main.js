@@ -27,7 +27,9 @@
 
     caches.has('gameland-shell-v1').then(function (ready) {
       progressBar.style.width = '100%';
-      statusText.textContent = ready ? 'رابط گیم‌لند برای استفادهٔ آفلاین آماده است.' : 'کش هنوز آماده نیست؛ صفحه را یک‌بار تازه‌سازی کنید.';
+      statusText.textContent = ready
+        ? 'رابط گیم‌لند برای استفادهٔ آفلاین آماده است.'
+        : 'کش هنوز آماده نیست؛ صفحه را یک‌بار تازه‌سازی کنید.';
       checkButton.disabled = false;
     }).catch(function () {
       progressBar.style.width = '100%';
@@ -39,8 +41,11 @@
   setNetworkStatus();
   window.addEventListener('online', setNetworkStatus);
   window.addEventListener('offline', setNetworkStatus);
+
   checkButton.addEventListener('click', checkOfflineReady);
-  restartButton.addEventListener('click', function () { window.location.reload(); });
+  restartButton.addEventListener('click', function () {
+    window.location.reload();
+  });
 
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', function () {
