@@ -1,70 +1,37 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>GAMELAND | PWA</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>GAMELAND</title>
+    
+    <!-- PWA Meta Tags -->
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#1a1a1a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+
+    <!-- Styles -->
     <link rel="stylesheet" href="style.css">
-    <meta name="theme-color" content="#4a4a4a">
 </head>
 <body>
-    <!-- Header Section -->
-    <header class="header">
-        <h1>GAMELAND</h1>
-        <p class="subtitle">Powered by Qassem Akbarzadeh</p>
-        <p class="subtitle">کاشمر، خیابان ترابی ۱۵</p>
-        <p class="subtitle">09364229748</p>
+
+    <header class="app-header">
+        <div class="brand">GAMELAND</div>
+        <div class="operator">Powered by Qassem Akbarzadeh</div>
+        <div class="location">کاشمر، خیابان ترابی ۱۵</div>
+        <div class="contact">09364229748</div>
     </header>
 
-    <!-- Main Container -->
-    <div id="mainContainer" class="main-container">
-        <!-- Initial Screen -->
-        <div id="initialScreen" class="screen">
-            <div id="psLogoContainer" class="logo-container"></div>
-            <h2 id="clickToStartText">برای شروع کلیک کنید</h2>
-            <button id="exploitRunBtn" class="main-btn">اجرای Jailbreak</button>
+    <main id="app-container">
+        <!-- محتوا توسط main.js مدیریت می‌شود -->
+        <div id="status-area" class="status-card">
+            <p id="connection-status">در حال بررسی وضعیت اتصال...</p>
         </div>
+    </main>
 
-        <!-- Exploit Section -->
-        <div id="exploitContainer" class="screen">
-            <div id="statusContainer">
-                <p id="statusMsg">در حال آماده‌سازی...</p>
-                <div id="progressBar" class="progress-bar"><div></div></div>
-            </div>
-        </div>
-
-        <!-- Payloads UI -->
-        <div id="payloadsContainer" class="screen">
-            <div class="tabs">
-                <button id="toolsTab" aria-selected="true">ابزارها</button>
-                <button id="linuxTab">لینوکس</button>
-                <button id="advancedPayloadsTab">پیشرفته</button>
-                <button id="customPayloadsTab">سفارشی</button>
-            </div>
-            <div id="payloadsList">
-                <!-- Dynamic Content -->
-                <section id="toolsSection"></section>
-                <section id="linuxSection" class="hidden"></section>
-                <section id="advancedPayloadsSection" class="hidden"></section>
-                <section id="customPayloadsSection" class="hidden"></section>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modals -->
-    <div id="retryModal" class="modal hidden">
-        <div class="modal-content">
-            <h3>خطا در عملیات</h3>
-            <p>Jailbreak با موفقیت انجام نشد.</p>
-            <button onclick="location.reload()">راه‌اندازی مجدد</button>
-            <button onclick="hideJbRetryModal()">ادامه</button>
-        </div>
-    </div>
-
-    <!-- Scripts (Loading sequence) -->
-    <script src="includes/js/index.js"></script>
-    <script src="includes/js/autoJbRetry.js"></script>
-    <script src="includes/js/events.js"></script>
-    <script src="includes/js/design.js"></script>
+    <!-- Scripts -->
+    <script src="main.js"></script>
 </body>
 </html>
