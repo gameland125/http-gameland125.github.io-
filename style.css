@@ -1,35 +1,41 @@
 :root {
-  --bg: #b9b9b9;
+  --bg-top: #cfcfcf;
+  --bg-bottom: #a8a8a8;
   --panel: #d8d8d8;
-  --panel-dark: #c6c6c6;
-  --text: #1d1d1d;
-  --muted: #4a4a4a;
-  --border: #7b7b7b;
-  --shadow: rgba(0, 0, 0, 0.25);
-  --accent: #4d4d4d;
-  --accent-2: #2f2f2f;
-  --success: #2e6b3f;
-  --danger: #8b2d2d;
+  --panel-alt: #c7c7c7;
+  --text: #1f1f1f;
+  --muted: #4d4d4d;
+  --border: #787878;
+  --shadow: rgba(0, 0, 0, 0.22);
+  --button-top: #727272;
+  --button-bottom: #424242;
+  --button-top-hover: #878787;
+  --button-bottom-hover: #575757;
+  --success-bg: #d8eedc;
+  --success-text: #255d34;
+  --danger-bg: #f2d8d8;
+  --danger-text: #842c2c;
+  --neutral-bg: #ececec;
 }
 
 * {
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   min-height: 100%;
-  background: linear-gradient(180deg, #c8c8c8 0%, #a9a9a9 100%);
-  color: var(--text);
   font-family: Arial, Helvetica, sans-serif;
+  color: var(--text);
+  background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-bottom) 100%);
 }
 
 body {
   display: flex;
-  justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  justify-content: center;
   padding: 20px;
 }
 
@@ -50,8 +56,8 @@ body {
 }
 
 h1 {
-  margin: 0 0 8px;
-  font-size: clamp(2rem, 5vw, 3.2rem);
+  margin: 0 0 10px;
+  font-size: clamp(2rem, 5vw, 3.1rem);
   letter-spacing: 0.08em;
   color: #222;
   text-shadow: 1px 1px 0 #fff;
@@ -59,81 +65,91 @@ h1 {
 
 .subtitle {
   margin: 4px 0;
-  font-size: 1.05rem;
+  font-size: 1.02rem;
   color: var(--muted);
   font-weight: 700;
+  line-height: 1.6;
 }
 
 .panel {
-  background: var(--panel-dark);
+  background: var(--panel-alt);
   border: 1px solid var(--border);
   padding: 18px;
   margin-bottom: 18px;
 }
 
+.panel p {
+  margin-top: 0;
+  line-height: 1.8;
+}
+
 .badge {
   display: inline-block;
+  min-width: 120px;
   padding: 6px 12px;
   border: 1px solid var(--border);
+  background: var(--neutral-bg);
+  color: var(--text);
   font-weight: 700;
-  background: #eee;
+  text-align: center;
 }
 
 .badge.online {
-  background: #d7f0dc;
-  color: var(--success);
+  background: var(--success-bg);
+  color: var(--success-text);
 }
 
 .badge.offline {
-  background: #f4d7d7;
-  color: var(--danger);
+  background: var(--danger-bg);
+  color: var(--danger-text);
 }
 
 .progress-container {
   width: 100%;
   height: 22px;
+  margin: 14px 0;
   background: #ececec;
   border: 1px solid var(--border);
-  margin: 14px 0;
   overflow: hidden;
 }
 
 .progress-bar {
   width: 0%;
   height: 100%;
-  background: linear-gradient(90deg, #5c5c5c, #2e2e2e);
+  background: linear-gradient(90deg, #5e5e5e, #2c2c2c);
   transition: width 0.35s ease;
 }
 
 #status-text {
-  font-size: 1.1rem;
-  font-weight: 700;
   margin: 12px 0 0;
   min-height: 1.6em;
+  font-size: 1.08rem;
+  font-weight: 700;
 }
 
 .buttons {
   display: flex;
-  gap: 12px;
   flex-wrap: wrap;
+  gap: 12px;
   margin-top: 16px;
 }
 
 button {
   appearance: none;
+  min-width: 180px;
+  min-height: 48px;
+  padding: 12px 16px;
   border: 1px solid #2f2f2f;
-  background: linear-gradient(180deg, #777, #444);
+  background: linear-gradient(180deg, var(--button-top), var(--button-bottom));
   color: #fff;
   font-size: 1rem;
   font-weight: 700;
-  padding: 12px 16px;
   cursor: pointer;
-  min-height: 48px;
-  min-width: 180px;
+  transition: background 0.2s ease, transform 0.1s ease, opacity 0.2s ease;
 }
 
 button:hover:not(:disabled) {
-  background: linear-gradient(180deg, #8a8a8a, #555);
+  background: linear-gradient(180deg, var(--button-top-hover), var(--button-bottom-hover));
 }
 
 button:active:not(:disabled) {
@@ -152,7 +168,7 @@ hr {
 }
 
 h2 {
-  margin-top: 0;
+  margin: 0 0 12px;
   font-size: 1.4rem;
   color: #222;
 }
@@ -164,17 +180,23 @@ ul {
 
 li {
   margin: 8px 0;
-  line-height: 1.7;
   font-size: 1rem;
+  line-height: 1.8;
 }
 
 code {
   background: #efefef;
-  border: 1px solid #bbb;
+  border: 1px solid #b9b9b9;
   padding: 1px 6px;
+  color: #222;
 }
 
 @media (max-width: 640px) {
+  body {
+    padding: 12px;
+    align-items: flex-start;
+  }
+
   .container {
     padding: 16px;
   }
@@ -186,5 +208,9 @@ code {
   button {
     width: 100%;
     min-width: 0;
+  }
+
+  .badge {
+    margin-top: 6px;
   }
 }
