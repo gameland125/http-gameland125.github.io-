@@ -1,139 +1,97 @@
-// Events
+// events.js - Gameland PWA Event Management
+// Operator: Qassem Akbarzadeh | Kashmar, Darabi 15
+
 // Scroll snap for the PS4
 ui.mainContainer.addEventListener('scroll', () => {
     // Only apply if using a PS4
     if (user.platform != "PS4" || !ui.initialScreen) return;
+    
+    // Simple vertical snap logic
     if (ui.mainContainer.scrollTop > lastScrollY) {
-        // scrolling down
         if (lastSection !== "exploit") {
-            document.getElementById('exploitContainer').scrollIntoView({ block: "end" });
+            document.getElementById('exploitContainer').scrollIntoView({ block: "end", behavior: "smooth" });
             lastSection = "exploit";
         }
     } else if (ui.mainContainer.scrollTop < lastScrollY) {
-        // scrolling up
         if (lastSection !== "initial") {
-            ui.initialScreen.scrollIntoView({ block: "end" });
+            ui.initialScreen.scrollIntoView({ block: "end", behavior: "smooth" });
             lastSection = "initial";
         }
     }
     lastScrollY = ui.mainContainer.scrollTop;
 });
 
-// Launch jailbreak
-ui.exploitRunBtn.addEventListener('click', () => {
+// Launch jailbreak event handler
+const initiateJb = () => {
     if (user.blockJailbreak) return;
     user.blockJailbreak = true;
-    chooseHEN();
+    
+    // Ensure we trigger HEN choice
+    if (typeof chooseHEN === 'function') chooseHEN();
+    
+    // Start jailbreak process
     jailbreak();
-});
+};
 
-ui.psLogoContainer.addEventListener('click', () => {
-    if (user.blockJailbreak) return;
-    user.blockJailbreak = true;
-    chooseHEN();
-    jailbreak();
-});
+ui.exploitRunBtn.addEventListener('click', initiateJb);
+ui.psLogoContainer.addEventListener('click', initiateJb);
 
-// tabs switching
-ui.toolsTab.addEventListener('click', () => {
-    if (ui.toolsSection.classList.contains('hidden')) {
-        ui.toolsSection.classList.remove('hidden');
-        ui.linuxSection.classList.add('hidden');
-        ui.advancedPayloadsSection.classList.add('hidden');
-        ui.customPayloadsSection.classList.add('hidden');
+// Tabs switching logic
+const switchTab = (tabName) => {
+    const sections = [ui.toolsSection, ui.linuxSection, ui.advancedPayloadsSection, ui.customPayloadsSection];
+    const tabs = [ui.toolsTab, ui.linuxTab, ui.advancedPayloadsTab, ui.customPayloadsTab];
 
-        ui.toolsTab.setAttribute("aria-selected", "true");
-        ui.linuxTab.setAttribute("aria-selected", "false");
-        ui.advancedPayloadsTab.setAttribute("aria-selected", "false");
-        ui.customPayloadsTab.setAttribute("aria-selected", "false");
+    // Hide all, reset all tabs
+    sections.forEach(s => s.classList.add('hidden'));
+    tabs.forEach(t => t.setAttribute("aria-selected", "false"));
 
-        ui.toolsSection.innerHTML = '';
-        renderPayloads(payloadsList.filter(p => p.category === 'tools'));
+    // Activate selected
+    let targetSection, targetTab;
+    switch(tabName) {
+        case 'tools': targetSection = ui.toolsSection; targetTab = ui.toolsTab; break;
+        case 'linux': targetSection = ui.linuxSection; targetTab = ui.linuxTab; break;
+        case 'advanced': targetSection = ui.advancedPayloadsSection; targetTab = ui.advancedPayloadsTab; break;
+        case 'custom': targetSection = ui.customPayloadsSection; targetTab = ui.customPayloadsTab; break;
     }
-    ui.payloadsList.scrollTop = 0;
-    // Update lastTap
-    saveLastTab('tools');
-})
 
-ui.linuxTab.addEventListener('click', () => {
-    if (ui.linuxSection.classList.contains('hidden')) {
-        ui.toolsSection.classList.add('hidden');
-        ui.linuxSection.classList.remove('hidden');
-        ui.advancedPayloadsSection.classList.add('hidden');
-        ui.customPayloadsSection.classList.add('hidden');
-
-        ui.toolsTab.setAttribute("aria-selected", "false");
-        ui.linuxTab.setAttribute("aria-selected", "true");
-        ui.advancedPayloadsTab.setAttribute("aria-selected", "false");
-        ui.customPayloadsTab.setAttribute("aria-selected", "false");
-
-        ui.linuxSection.innerHTML = '';
-        renderPayloads(payloadsList.filter(p => p.category === 'linux'));
+    if (targetSection) {
+        targetSection.classList.remove('hidden');
+        targetTab.setAttribute("aria-selected", "true");
+        targetSection.innerHTML = '';
+        
+        // Render based on category
+        const filtered = payloadsList.filter(p => p.category === tabName);
+        renderPayloads(filtered);
     }
+
     ui.payloadsList.scrollTop = 0;
-    // Update lastTap
-    saveLastTab('linux');
-});
+    saveLastTab(tabName);
+};
 
-ui.advancedPayloadsTab.addEventListener('click', () => {
-    if (ui.advancedPayloadsSection.classList.contains('hidden')) {
-        ui.toolsSection.classList.add('hidden');
-        ui.linuxSection.classList.add('hidden');
-        ui.advancedPayloadsSection.classList.remove('hidden');
-        ui.customPayloadsSection.classList.add('hidden');
+ui.toolsTab.addEventListener('click', () => switchTab('tools'));
+ui.linuxTab.addEventListener('click', () => switchTab('linux'));
+ui.advancedPayloadsTab.addEventListener('click', () => switchTab('advanced'));
+ui.customPayloadsTab.addEventListener('click', () => switchTab('custom'));
 
-        ui.toolsTab.setAttribute("aria-selected", "false");
-        ui.linuxTab.setAttribute("aria-selected", "false");
-        ui.advancedPayloadsTab.setAttribute("aria-selected", "true");
-        ui.customPayloadsTab.setAttribute("aria-selected", "false");
-
-        ui.advancedPayloadsSection.innerHTML = '';
-        renderPayloads(payloadsList.filter(p => p.category === 'advanced'));
-    }
-    ui.payloadsList.scrollTop = 0;
-    // Update lastTap
-    saveLastTab('advanced');
-
-});
-
-ui.customPayloadsTab.addEventListener('click', () => {
-    if (ui.customPayloadsSection.classList.contains('hidden')) {
-        ui.toolsSection.classList.add('hidden');
-        ui.linuxSection.classList.add('hidden');
-        ui.advancedPayloadsSection.classList.add('hidden');
-        ui.customPayloadsSection.classList.remove('hidden');
-
-        ui.toolsTab.setAttribute("aria-selected", "false");
-        ui.linuxTab.setAttribute("aria-selected", "false");
-        ui.advancedPayloadsTab.setAttribute("aria-selected", "false");
-        ui.customPayloadsTab.setAttribute("aria-selected", "true");
-    }
-    ui.payloadsList.scrollTop = 0;
-    // Update lastTap
-    saveLastTab('custom');
-
-});
-
-// Save ps4Fw from select element (Only for communicating external device -> PS4 for local network)
+// Save ps4Fw settings
 ui.ps4FwSelect.addEventListener('change', function () {
     user.ps4Fw = ui.ps4FwSelect.value;
     localStorage.setItem('ps4Fw', ui.ps4FwSelect.value);
     ui.ps4FwSelect.style.border = "1px solid white";
-})
-
-// Stop the auto jailbreak retry on button click
-ui.stopAutoJbBtn.addEventListener('click', () => {
-    clearInterval(autoJbInterval);
-    sessionStorage.setItem('autoJbRetry', false);
-    ui.stopAutoJbBtn.classList.toggle('hidden');
-    if (localStorage.getItem("theme") == "compact") {
-        ui.clickToStartText.textContent = window.lang.title || "PSFree Enhanced";
-    } else ui.clickToStartText.textContent = window.lang.clickToStart;
 });
 
-// turn off auto settings tab clicker after the user clicks close for the first time.
-document.getElementById("close-settings").addEventListener('click', function () {
-    if (localStorage.getItem("NewUser") != "0") {
-        localStorage.setItem("NewUser", "0");
-    }
+// Stop the auto jailbreak retry
+ui.stopAutoJbBtn.addEventListener('click', () => {
+    if (typeof autoJbInterval !== 'undefined') clearInterval(autoJbInterval);
+    sessionStorage.setItem('autoJbRetry', 'false');
+    ui.stopAutoJbBtn.classList.add('hidden');
+    
+    // Restore original text
+    const defaultText = (localStorage.getItem("theme") === "compact") ? (window.lang.title || "PSFree Enhanced") : window.lang.clickToStart;
+    if(ui.clickToStartText) ui.clickToStartText.textContent = defaultText;
+});
+
+// Settings close event
+document.getElementById("close-settings")?.addEventListener('click', function () {
+    localStorage.setItem("NewUser", "0");
 });
