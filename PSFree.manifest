@@ -1,6 +1,6 @@
 CACHE MANIFEST
 # v2
-# Rebuilt to match files present in gameland125.github.zip
+# Generated for cache-only deployment without missing payload binaries
 
 CACHE:
 index.html
@@ -13,6 +13,7 @@ includes/js/checkFw.js
 includes/js/HENs.js
 includes/js/design.js
 includes/js/autoJbRetry.js
+includes/js/exploits/bundle.js
 includes/js/languages/ar.js
 includes/js/languages/en.js
 includes/js/languages/es.js
@@ -20,8 +21,6 @@ includes/js/languages/fa.js
 includes/js/languages/ru.js
 includes/js/languages/tr.js
 includes/js/languages/zh-cn.js
-includes/js/exploits/bundle.js
-includes/payloads/payloads.js
 includes/css/layouts/compact.css
 includes/css/layouts/index.css
 includes/css/colors/default.css
