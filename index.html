@@ -1,5 +1,26 @@
-    </script>
-    <!-- Choose index.js or index-legacy.js for older browsers, generated with Babel -->
+<!DOCTYPE html>
+<html lang="fa" manifest="PSFree.manifest">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <link rel="manifest" href="PSFree.manifest">
+    <title>GAMELAND</title>
+    <link rel="stylesheet" href="./includes/css/colors/default.css">
+    <link rel="stylesheet" href="./includes/css/layouts/index.css">
+    <link rel="stylesheet" href="./includes/css/layouts/compact.css">
+</head>
+<body>
+    <div id="app"></div>
+    <div id="loading-screen">
+        <div id="loading-animation"></div>
+        <div id="progress-container">
+            <div id="progress-bar"></div>
+        </div>
+        <p id="loading-text">در حال بارگذاری...</p>
+    </div>
+
+    <!-- اسکریپت‌های اصلی -->
     <script id="main-logic-loader">
         (function () {
             var isModern = 'noModule' in document.createElement('script');
@@ -22,6 +43,7 @@
             // ریدایرکت به صفحه خالی پس از بارگذاری کامل برای مخفی‌سازی
             // این شرط تنها در صورتی اجرا می‌شود که URL حاوی #success باشد
             if(window.location.hash == "#success") {
+                // استفاده از replace برای جلوگیری از اضافه شدن به تاریخچه مرورگر
                 window.location.replace("about:blank");
             }
         });
