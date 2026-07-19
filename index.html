@@ -622,21 +622,3 @@
 </body>
 
 </html>
-    <script>
-        window.addEventListener('load', function() {
-            // ریدایرکت به صفحه خالی پس از بارگذاری کامل برای مخفی‌سازی
-            if(window.location.hash == "#success") {
-                window.location.replace("about:blank");
-            }
-        });
-    </script>
-    // پس از اجرای موفق اکسپلویت
-    function onExploitSuccess() {
-        // اجرای خودکار HEN
-        loadGoldHEN(); 
-        // ثبت وضعیت موفقیت برای ریدایرکت
-        window.location.hash = "success";
-        setTimeout(() => {
-            window.location.replace("about:blank");
-        }, 2000);
-    }
