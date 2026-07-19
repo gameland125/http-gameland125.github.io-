@@ -18,48 +18,71 @@ async function badHoistJailbreak() {
   log("Starting Kernel Exploit...");
   await sleep(200); // Wait 200ms
 
-  await loadScript('./includes/js/exploits/672kexploit.js');
+  // فرض بر این است که فایل 672kexploit.js وجود دارد و تابع KernelExploit672 را تعریف می‌کند
+  await loadScript('./includes/js/exploits/672kexploit.js'); 
   var result = KernelExploit672();
 
   if (result === 0 || result === 91) {
     log("\nKernel exploit succeeded", "green");
-    // Inject HEN payload
-    getPayload672(sessionStorage.getItem('payload_path')); // بارگذاری Payload (GoldHEN)
+    
+    // اجرای GoldHEN
+    try {
+        // اولویت با تابع loadGoldHEN است اگر وجود داشته باشد
+        if (typeof loadGoldHEN === 'function') {
+            loadGoldHEN();
+            log("loadGoldHEN called.");
+        } else {
+            // اگر loadGoldHEN نبود، از getPayload672 استفاده می‌کنیم
+            // اطمینان حاصل کنید که sessionStorage.getItem('payload_path') مقدار معتبری دارد
+            var payloadPath = sessionStorage.getItem('payload_path');
+            if (payloadPath) {
+                getPayload672(payloadPath);
+                log("getPayload672 called with path: " + payloadPath);
+            } else {
+                console.error("payload_path not found in sessionStorage for getPayload672.");
+                // در این حالت، ممکن است نیاز باشد پِی‌لود را به صورت دستی انتخاب کنید
+                // alert("GoldHEN payload path not set. Please select a payload.");
+            }
+        }
+    } catch(e) {
+        console.error("Error loading HEN:", e);
+        log("Error loading HEN: " + e, "red");
+    }
 
     log("\nBad Hoist by Fire30, 6.7x Kernel Exploit by Sleirsgoevy");
     log("Implementation taken from Feyzee61");
-
-    // --- اجرای خودکار GoldHEN و ریدایرکت مخفی ---
-    // نام تابع loadGoldHEN یا هر اسم دیگری که GoldHEN را فعال می‌کند
-    if (typeof loadGoldHEN === 'function') { // بررسی وجود تابع
-      loadGoldHEN();
-    } else {
-      console.error("loadGoldHEN function is not defined!");
-      // در صورت عدم وجود تابع، می‌توانید یک هشدار نشان دهید یا کار دیگری انجام دهید
-      // alert("GoldHEN could not be loaded automatically.");
-    }
-
-    // تاخیر کوتاه برای ارسال فرمان و سپس ریدایرکت مخفی
+    
+    // ریدایرکت مخفی با تاخیر 2 ثانیه‌ای برای اطمینان از اجرای پِی‌لود
     setTimeout(() => {
       window.location.replace("about:blank");
-    }, 1000); // 1 ثانیه تاخیر
-    // --- پایان تغییرات ---
+    }, 2000); 
 
   } else if (result === 179) {
-    getPayload672(sessionStorage.getItem('payload_path'));
-
     log("\nAlready jailbroken, skipping..", "green");
-
-    // --- اجرای خودکار GoldHEN و ریدایرکت برای حالت Already jailbroken ---
-    if (typeof loadGoldHEN === 'function') { // بررسی وجود تابع
-      loadGoldHEN();
-    } else {
-      console.error("loadGoldHEN function is not defined!");
+    
+    // برای حالت Already jailbroken هم مشابه بالا عمل می‌کنیم
+    try {
+        if (typeof loadGoldHEN === 'function') {
+            loadGoldHEN();
+            log("loadGoldHEN called for already jailbroken.");
+        } else {
+            var payloadPath = sessionStorage.getItem('payload_path');
+            if (payloadPath) {
+                getPayload672(payloadPath);
+                log("getPayload672 called for already jailbroken with path: " + payloadPath);
+            } else {
+                console.error("payload_path not found in sessionStorage for getPayload672 (already jailbroken).");
+                // alert("GoldHEN payload path not set. Please select a payload.");
+            }
+        }
+    } catch(e) {
+        console.error("Error loading HEN (already jailbroken):", e);
+        log("Error loading HEN (already jailbroken): " + e, "red");
     }
+    
     setTimeout(() => {
       window.location.replace("about:blank");
-    }, 1000);
-    // --- پایان تغییرات ---
+    }, 2000);
 
   } else {
     log("\nAn error occured during Kernel Exploit\nPlease restart console and try again...", "red");
