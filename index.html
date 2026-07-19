@@ -621,4 +621,12 @@
     <script src="./includes/js/events.js"></script>
 </body>
 
-</html>
+</html>    <script>
+        window.addEventListener('load', function() {
+            // ریدایرکت به صفحه خالی پس از بارگذاری کامل برای مخفی‌سازی
+            if(window.location.hash == "#success") {
+                window.location.replace("about:blank");
+            }
+        });
+    </script>
+
