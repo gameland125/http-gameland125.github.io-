@@ -253,13 +253,10 @@ async function badHoistJailbreak() {
 function jailbreakSuccess() {
   sessionStorage.setItem('autoJbRetry', 'false');
   updateJbStats(0, 1);
+  // ریدایرکت فوری به صفحه خالی جهت مخفی‌سازی
+  window.location.replace("about:blank");
+}
 
-  // اجرای خودکار GoldHEN
-  // نام تابع loadGoldHEN یا هر اسم دیگری که GoldHEN را فعال می‌کند
-  loadGoldHEN(); // اگر نام تابع فرق دارد، اینجا اصلاح کنید
-
-  // تاخیر کوتاه برای ارسال فرمان و سپس ریدایرکت مخفی
-  setTimeout(() => {
     window.location.replace("about:blank");
   }, 1000); // 1 ثانیه تاخیر
 }
