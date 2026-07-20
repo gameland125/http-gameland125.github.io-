@@ -594,10 +594,13 @@
                 loadSettings();
             }
             // check for applicationCache
-            if (window.applicationCache) {
-                window.applicationCache.addEventListener("progress", DLProgress, false);
-                window.applicationCache.oncached = function (e) { DisplayCacheProgress(); };
-                window.applicationCache.onupdateready = function (e) { DisplayCacheProgress(); };
+            if window.applicationCache.oncached = function (e) {
+                localStorage.setItem('offlineCacheInstalled', 'true');
+                DisplayCacheProgress();
+            };
+            window.applicationCache.onupdateready = function (e) {
+                localStorage.setItem('offlineCacheInstalled', 'true');
+                DisplayCacheProgress); };
             } else {
                 console.warn("This browser does not support save in cache!");
             }
