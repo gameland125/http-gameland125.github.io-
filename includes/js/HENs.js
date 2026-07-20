@@ -60,3 +60,6 @@ function loadJbFlavor() {
         hen2Radio.checked = true;
     }
 }
+function chooseHEN() {
+    GoldHEN();
+}
