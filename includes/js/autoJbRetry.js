@@ -19,16 +19,18 @@ function autoJailbreak() {
         return;
     }
 
-    // run automatically after cache install, but only for GoldHEN
+    // بخش جدید: اجرای فوری و خودکار بلافاصله بعد از نصب کش (فقط برای GoldHEN)
     if (sessionStorage.getItem("continueAfterInstall") === "true") {
         sessionStorage.removeItem("continueAfterInstall");
 
+        // اگر چیزی غیر از GoldHEN انتخاب شده باشد، متوقف می‌شود
         if (localStorage.getItem("jailbreakFlavor") !== "GoldHEN") {
             return;
         }
 
+        // فعال کردن ریترای برای دفعات احتمالی بعدی و اجرای فوری جیلبریک
         sessionStorage.setItem("autoJbRetry", "true");
-        autoJailbreakTimer();
+        jailbreak(); 
         return;
     }
 
