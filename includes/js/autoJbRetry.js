@@ -6,7 +6,6 @@ function setAutoJbRetry(checked) {
     if (confirm(window.lang.autoJbRetryConfirm)) {
         // close settings popup
         settingsPopup();
-
         jailbreak();
     }
 }
@@ -19,18 +18,19 @@ function autoJailbreak() {
         return;
     }
 
-    // بخش جدید: اجرای فوری و خودکار بلافاصله بعد از نصب کش (فقط برای GoldHEN)
+    // اجرای فوری بعد از نصب کش، فقط برای GoldHEN
     if (sessionStorage.getItem("continueAfterInstall") === "true") {
         sessionStorage.removeItem("continueAfterInstall");
 
-        // اگر چیزی غیر از GoldHEN انتخاب شده باشد، متوقف می‌شود
         if (localStorage.getItem("jailbreakFlavor") !== "GoldHEN") {
             return;
         }
 
-        // فعال کردن ریترای برای دفعات احتمالی بعدی و اجرای فوری جیلبریک
+        // اگر payload قبلی در session مانده باشد، پاکش کن تا مسیر درست انتخاب شود
+        sessionStorage.removeItem("payload_path");
+
         sessionStorage.setItem("autoJbRetry", "true");
-        jailbreak(); 
+        jailbreak();
         return;
     }
 
