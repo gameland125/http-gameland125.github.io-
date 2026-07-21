@@ -1,4 +1,4 @@
-<html manifest="psfree_lapse.cache">
+<html manifest="PSFree.manifest">
 <head>
 <title>PSFree-Lapse Exploit For PS4 9.00</title>
 <link rel="shortcut icon" href="favicon.ico"></link>
@@ -21,12 +21,3 @@ window.applicationCache.addEventListener("progress",DLProgress,false);window.app
 <div id=msgs class=info style='-webkit-font-feature-settings:"tnum";font-feature-settings:"tnum";'></div>
 </body>
 </html>
-appCache.addEventListener("noupdate", function () {
-    document.getElementById("status").innerHTML =
-        "کش آماده است؛ در حال اجرای GoldHEN...";
-
-    openMainPageAfterCache();
-}, false);
-function autoJailbreak() {
-    jailbreak();
-}
