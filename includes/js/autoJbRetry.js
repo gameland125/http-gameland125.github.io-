@@ -45,6 +45,7 @@ function autoJailbreakTimer() {
         timer--;
     }, 1000);
 }
-setTimeout(function () {
+setTimeout(
+function () {
         autoJailbreak();
     }, 1000);
