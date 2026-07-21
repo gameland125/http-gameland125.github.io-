@@ -6,6 +6,7 @@ function setAutoJbRetry(checked) {
     if (confirm(window.lang.autoJbRetryConfirm)) {
         // close settings popup
         settingsPopup();
+
         jailbreak();
     }
 }
@@ -17,33 +18,15 @@ function autoJailbreak() {
         jailbreak();
         return;
     }
-
-    // اجرای فوری بعد از نصب کش، فقط برای GoldHEN
-    if (sessionStorage.getItem("continueAfterInstall") === "true") {
-        sessionStorage.removeItem("continueAfterInstall");
-
-        if (localStorage.getItem("jailbreakFlavor") !== "GoldHEN") {
-            return;
-        }
-
-        // اگر payload قبلی در session مانده باشد، پاکش کن تا مسیر درست انتخاب شود
-        sessionStorage.removeItem("payload_path");
-
-        sessionStorage.setItem("autoJbRetry", "true");
-        jailbreak();
-        return;
-    }
-
     var checked = (localStorage.getItem('autoJbRetry') || 'true') === 'true'; // default to true if not set
     var sessionChecked = sessionStorage.getItem('autoJbRetry') == 'true';
     ui.autoJbRetry.checked = checked;
-
     // check if supported ps4
     if (window.ps4Fw < 6.70 || window.ps4Fw > 9.60 || !window.ps4Fw) return;
 
-    // If auto jb is checked and previous jailbreak attempt was unsuccessful, retry jailbreak with a timer
+    // If auto jailbreak is enabled for this session, start it directly.
     if (checked && sessionChecked) {
-        autoJailbreakTimer();
+        jailbreak();
     }
 }
 
