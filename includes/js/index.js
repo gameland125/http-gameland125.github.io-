@@ -723,3 +723,6 @@ function loadLapseChain() {
     radioElement.checked = true;
   }
 }
+function autoJailbreak() {
+    jailbreak();
+}
