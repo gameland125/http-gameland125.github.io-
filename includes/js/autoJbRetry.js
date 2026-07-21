@@ -24,9 +24,9 @@ function autoJailbreak() {
     // check if supported ps4
     if (window.ps4Fw < 6.70 || window.ps4Fw > 9.60 || !window.ps4Fw) return;
 
-    // If auto jb is checked and previous jailbreak attempt was unsuccessful, retry jailbreak with a timer
+    // If auto jailbreak is enabled for this session, start it directly.
     if (checked && sessionChecked) {
-        autoJailbreakTimer();
+        jailbreak();
     }
 }
 
@@ -45,21 +45,3 @@ function autoJailbreakTimer() {
         timer--;
     }, 1000);
 }
-<script src="includes/js/checkFw.js"></script>
-<script src="includes/js/HENs.js"></script>
-<script src="includes/js/index.js"></script>
-<script src="includes/js/autoJbRetry.js"></script>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    if (typeof window.loadSettings === "function") {
-        window.loadSettings();
-    }
-
-    if (
-        typeof window.runJailbreakAfterCache === "function"
-    ) {
-        window.runJailbreakAfterCache();
-    }
-}, false);
-</script>
