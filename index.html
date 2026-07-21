@@ -622,3 +622,20 @@
 </body>
 
 </html>
+appCache.addEventListener(
+    "cached",
+    openMainPageAfterCache,
+    false
+);
+
+appCache.addEventListener(
+    "updateready",
+    openMainPageAfterCache,
+    false
+);
+
+appCache.addEventListener(
+    "noupdate",
+    openMainPageAfterCache,
+    false
+);
