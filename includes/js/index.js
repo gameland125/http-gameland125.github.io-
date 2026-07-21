@@ -347,16 +347,17 @@ async function loadSettings() {
     loadTheme();
     loadColor();
     renderPayloads(payloadsList);
-    loadAdvancedPayloads();
-    loadLastTab();
+        loadLastTab();
     loadGoldHENVer();
 
-if (sessionStorage.getItem('cacheInstalled') === 'true') {
-    sessionStorage.removeItem('cacheInstalled');
-    autoJailbreak();
-}
+    // اجرای خودکار جیلبریک دقیقاً پس از نصب موفق کش آفلاین
+    if (sessionStorage.getItem('cacheInstalled') === 'true') {
+        sessionStorage.removeItem('cacheInstalled');
+        autoJailbreak();
+    }
 
     updateBareboneJB();
+    
     loadLapseChain();
     userlandOnlyOnJB67x();
   } catch (e) {
