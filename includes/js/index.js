@@ -350,7 +350,12 @@ async function loadSettings() {
     loadAdvancedPayloads();
     loadLastTab();
     loadGoldHENVer();
+
+if (sessionStorage.getItem('cacheInstalled') === 'true') {
+    sessionStorage.removeItem('cacheInstalled');
     autoJailbreak();
+}
+
     updateBareboneJB();
     loadLapseChain();
     userlandOnlyOnJB67x();
