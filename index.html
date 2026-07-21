@@ -589,7 +589,12 @@
                 }
             } catch (e) {
                 console.error("Early entrypoint hook failed: " + e.message);
-            }
+            }document.addEventListener('DOMContentLoaded', function () {
+    if (typeof loadSettings === 'function') {
+        loadSettings();
+    }
+});
+
         }
     </script>
 
