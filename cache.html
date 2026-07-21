@@ -1,96 +1,69 @@
-<html manifest="PSFree.manifest">
+<!doctype html>
+<html lang="fa" manifest="PSFree.manifest">
 <head>
-<title>PSFree-Lapse Exploit For PS4 9.00</title>
-<link rel="shortcut icon" href="favicon.ico"></link>
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Offline Cache Installer</title>
 <style>
-body{
-    background-image: url("bg.jpg");
-    background-repeat: no-repeat;
-    background-size:70%;
-    background-position: center;
+body {
     background-color: white;
-    color:black;
-    font-size:20px;
-    text-align:center;
-    margin:0;
-    overflow:hidden;
+    color: black;
+    font-size: 20px;
+    text-align: center;
+    margin: 0;
+    overflow: hidden;
 }
-.info{
-    overflow:hidden;
-    position:fixed;
-    position:absolute;
-    top:45%;
-    left:50%;
-    font-size:25px;
-    font-family:sans-serif;
-    color:black;
-    transform:translate(-50%, -50%);
+.info {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: sans-serif;
+    white-space: nowrap;
 }
 </style>
 <script>
-var msgs = null;
-
-function setMessage(text) {
-    if (!msgs) msgs = document.getElementById("msgs");
-    if (msgs) msgs.innerHTML = text;
-}
-
-function DLProgress(e) {
-    if (!e || !e.total) {
-        setMessage("Installing Offline Cache ...");
-        return;
-    }
-    var Percent = Math.round((e.loaded / e.total) * 100);
-    setMessage("Installing Offline Cache ... " + Percent + "%");
-}
-
-function CacheInstalled() {
-    setMessage("Cache Installed Successfully");
-    setTimeout(function () {
-        location.replace("index.html");
-    }, 2000);
-}
-
-function CacheFailed() {
-    setMessage("Cache Installation Failed");
-}
-
-function CacheNoUpdate() {
-    setMessage("No Cache Update Needed");
-    setTimeout(function () {
-        location.replace("index.html");
-    }, 1500);
-}
-
-function initCacheHandlers() {
-    if (!window.applicationCache) {
-        setMessage("Application Cache is not supported");
-        return;
+(function () {
+    function setMessage(message) {
+        var element = document.getElementById('msgs');
+        if (element) element.textContent = message;
     }
 
-    window.applicationCache.addEventListener("progress", DLProgress, false);
-    window.applicationCache.addEventListener("cached", CacheInstalled, false);
-    window.applicationCache.addEventListener("updateready", CacheInstalled, false);
-    window.applicationCache.addEventListener("noupdate", CacheNoUpdate, false);
-    window.applicationCache.addEventListener("error", CacheFailed, false);
+    function onProgress(event) {
+        var percent = event.total ? Math.round(event.loaded / event.total * 100) : 0;
+        setMessage('Installing Offline Cache ... ' + percent + '%');
+    }
 
-    try {
-        if (window.applicationCache.status === window.applicationCache.CACHED) {
-            CacheInstalled();
+    function goToIndex() {
+        location.replace('index.html');
+    }
+
+    function onInstalled() {
+        setMessage('Cache Installed Successfully');
+        setTimeout(goToIndex, 1000);
+    }
+
+    function onError() {
+        setMessage('Offline cache installation failed');
+    }
+
+    window.addEventListener('load', function () {
+        if (!window.applicationCache) {
+            setMessage('Application cache is not supported');
+            return;
         }
-    } catch (e) {}
-}
 
-window.addEventListener("load", function () {
-    msgs = document.getElementById("msgs");
-    setMessage("Preparing Offline Cache ...");
-    initCacheHandlers();
-}, false);
+        var appCache = window.applicationCache;
+        appCache.addEventListener('progress', onProgress, false);
+        appCache.addEventListener('cached', onInstalled, false);
+        appCache.addEventListener('updateready', onInstalled, false);
+        appCache.addEventListener('noupdate', goToIndex, false);
+        appCache.addEventListener('error', onError, false);
+    }, false);
+}());
 </script>
 </head>
-<body style="overflow:hidden">
-<div id="msgs" class="info" style='-webkit-font-feature-settings:"tnum";font-feature-settings:"tnum";'></div>
+<body>
+<div id="msgs" class="info">Preparing offline cache...</div>
 </body>
 </html>
