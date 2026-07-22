@@ -55,9 +55,9 @@ body {
 
         var appCache = window.applicationCache;
         appCache.addEventListener('progress', onProgress, false);
-        appCache.addEventListener('cached', onCacheReady, false);
-        appCache.addEventListener('updateready', onCacheReady, false);
-        appCache.addEventListener('noupdate', onCacheReady, false);
+        appCache.addEventListener('cached', onInstalled, false);
+        appCache.addEventListener('updateready', onInstalled, false);
+        appCache.addEventListener('noupdate', goToIndex, false);
         appCache.addEventListener('error', onError, false);
     }, false);
 }());
