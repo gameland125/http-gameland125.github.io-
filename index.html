@@ -621,31 +621,16 @@
     <script src="./includes/js/events.js"></script>
 <script>
 (function () {
-    if (localStorage.getItem('gamelandAutoGoldHEN') !== '1') return;
-
-    localStorage.removeItem('gamelandAutoGoldHEN');
-
-    setTimeout(function () {
-        var button = document.getElementById('exploitRun');
-        if (button) button.click();
-    }, 500);
-})();
-</script>
-    
-        if (marker !== '1') return;
-
-        localStorage.removeItem('gamelandAutoGoldHEN');
-
-        ['settings-btn','about-btn','scrollDown','henSelection','payloadsSection'].forEach(function (id) {
-            var el = document.getElementById(id);
-            if (el) el.classList.add('hidden');
-        });
-
-        var exploitButton = document.getElementById('exploitRun');
-        if (exploitButton) {
-            setTimeout(function () { exploitButton.click(); }, 0);
+    try {
+        if (localStorage.getItem('gamelandAutoGoldHEN') === '1') {
+            localStorage.removeItem('gamelandAutoGoldHEN');
+            setTimeout(function () {
+                var btn = document.getElementById('exploitRun');
+                if (btn) btn.click();
+            }, 500);
         }
-    }());
+    } catch (e) {}
+})();
 </script>
 </body>
 
