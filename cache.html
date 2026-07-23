@@ -1,6 +1,11 @@
 <script>
 function markAndGoToIndex() {
-    localStorage.setItem('gamelandAutoGoldHEN', '1');
+    try {
+        localStorage.setItem('gamelandAutoGoldHEN', '1');
+    } catch (error) {
+        // حتی اگر localStorage در دسترس نبود، وارد صفحه اصلی شو
+    }
+
     location.replace('index.html');
 }
 
@@ -8,10 +13,13 @@ function onInstalled() {
     setMessage('Cache Installed Successfully');
     setTimeout(markAndGoToIndex, 1000);
 }
-    
 
-function onProgress(e) {
-    // existing logic
+function onProgress(event) {
+    var percent = event.total
+        ? Math.round((event.loaded / event.total) * 100)
+        : 0;
+
+    setMessage('Installing Offline Cache ... ' + percent + '%');
 }
 
 function onError() {
@@ -25,6 +33,7 @@ window.addEventListener('load', function () {
     }
 
     var appCache = window.applicationCache;
+
     appCache.addEventListener('progress', onProgress, false);
     appCache.addEventListener('cached', onInstalled, false);
     appCache.addEventListener('updateready', onInstalled, false);
