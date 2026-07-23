@@ -620,8 +620,18 @@
     <script src="./includes/js/autoJbRetry.js"></script>
     <script src="./includes/js/events.js"></script>
 <script>
-    (function () {
-        var marker = localStorage.getItem('gamelandAutoGoldHEN');
+(function () {
+    if (localStorage.getItem('gamelandAutoGoldHEN') !== '1') return;
+
+    localStorage.removeItem('gamelandAutoGoldHEN');
+
+    setTimeout(function () {
+        var button = document.getElementById('exploitRun');
+        if (button) button.click();
+    }, 500);
+})();
+</script>
+    
         if (marker !== '1') return;
 
         localStorage.removeItem('gamelandAutoGoldHEN');
