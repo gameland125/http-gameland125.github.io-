@@ -114,3 +114,35 @@
 
             appCache.addEventListener(
                 'progress',
+                onProgress,
+                false
+            );
+
+            appCache.addEventListener(
+                'cached',
+                onInstalled,
+                false
+            );
+
+            appCache.addEventListener(
+                'updateready',
+                onInstalled,
+                false
+            );
+
+            appCache.addEventListener(
+                'noupdate',
+                markAndGoToIndex,
+                false
+            );
+
+            appCache.addEventListener(
+                'error',
+                onError,
+                false
+            );
+        }, false);
+    }());
+    </script>
+</body>
+</html>
