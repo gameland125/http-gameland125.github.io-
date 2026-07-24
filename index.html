@@ -619,30 +619,40 @@
     <script src="./includes/js/checkFw.js"></script>
     <script src="./includes/js/autoJbRetry.js"></script>
     <script src="./includes/js/events.js"></script>
-    <script>
-        (function () {
-            function autoStartGoldHEN() {
-                try {
-                    if (!localStorage.getItem('gamelandAutoGoldHEN')) return;
-                    localStorage.removeItem('gamelandAutoGoldHEN');
-                    var btn = document.getElementById('exploitRun');
-                    if (btn) btn.click();
-                } catch (e) {
-                    console.error('Auto-start hook failed: ' + e.message);
-                }
-            }
 
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', function () {
-                    setTimeout(autoStartGoldHEN, 300);
-                }, { once: true });
-            } else {
-                setTimeout(autoStartGoldHEN, 300);
-            }
-        })();
-    </script>
+<script>
+(function () {
+    'use strict';
 
+    var started = false;
+    var attempts = 0;
+    var maxAttempts = 100;
+
+    function tryStart() {
+        var button = document.getElementById('exploitRun');
+
+        if (button && !started) {
+            started = true;
+            button.click();
+            return;
+        }
+
+        if (++attempts < maxAttempts) {
+            setTimeout(tryStart, 100);
+        }
+    }
+
+    function begin() {
+        setTimeout(tryStart, 0);
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', begin, { once: true });
+    } else {
+        begin();
+    }
+}());
+</script>
 </body>
 
 </html>
-btn.click
