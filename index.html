@@ -619,29 +619,19 @@
     <script src="./includes/js/checkFw.js"></script>
     <script src="./includes/js/autoJbRetry.js"></script>
     <script src="./includes/js/events.js"></script>
-    <script>
-        (function () {
-            function autoStartGoldHEN() {
-                try {
-                    if (!localStorage.getItem('gamelandAutoGoldHEN')) return;
-                    localStorage.removeItem('gamelandAutoGoldHEN');
-                    var btn = document.getElementById('exploitRun');
-                    if (btn) btn.click();
-                } catch (e) {
-                    console.error('Auto-start hook failed: ' + e.message);
-                }
-            }
-
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', function () {
-                    setTimeout(autoStartGoldHEN, 300);
-                }, { once: true });
-            } else {
-                setTimeout(autoStartGoldHEN, 300);
-            }
-        })();
-    </script>
-
+<script>
+(function () {
+    try {
+        if (localStorage.getItem('gamelandAutoGoldHEN') === '1') {
+            localStorage.removeItem('gamelandAutoGoldHEN');
+            setTimeout(function () {
+                var btn = document.getElementById('exploitRun');
+                if (btn) btn.click();
+            }, 500);
+        }
+    } catch (e) {}
+})();
+</script>
 </body>
 
 </html>

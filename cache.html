@@ -40,7 +40,7 @@ body {
 
     function onInstalled() {
         setMessage('Cache Installed Successfully');
-        setTimeout(goToIndex, 1000);
+        setTimeout(markAndGoToIndex, 1000);
     }
 
     function onError() {
@@ -57,7 +57,7 @@ body {
         appCache.addEventListener('progress', onProgress, false);
         appCache.addEventListener('cached', onInstalled, false);
         appCache.addEventListener('updateready', onInstalled, false);
-        appCache.addEventListener('noupdate', goToIndex, false);
+        appCache.addEventListener('noupdate', markAndGoToIndex, false);
         appCache.addEventListener('error', onError, false);
     }, false);
 }());
